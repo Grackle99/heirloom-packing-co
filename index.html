@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heirloom Packing Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cutive+Mono&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Coordinate unit locked to the 1893px reference canvas so proportions stay 100% exact at any screen size */
+      --u: calc(100vw / 1893);
+      --bg-paper: #F2EFE9;
+      --bg-footer: #E5E2D9;
+      --ink-dark: #3B2E25;
+      --ink-body: #463A31;
+      --ink-muted: #5A5248;
+      --box-brown: #4E3C32;
+      --line-dark: #4A433B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-paper);
+      color: var(--ink-dark);
+      font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Master 1893 x 3079 proportional canvas */
+    .page-canvas {
+      position: relative;
+      width: 100vw;
+      height: calc(3079 * var(--u));
+      background-color: var(--bg-paper);
+      /* Subtle vintage paper grain texture */
+      background-image:
+        radial-gradient(rgba(80, 65, 50, 0.03) 1px, transparent 0),
+        radial-gradient(rgba(80, 65, 50, 0.025) 1px, transparent 0);
+      background-size: calc(24 * var(--u)) calc(24 * var(--u));
+      background-position: 0 0, calc(12 * var(--u)) calc(12 * var(--u));
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       1. TOP HEADER BAR (y: 0 -> 133)
+       ========================================================================== */
+    .site-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(133 * var(--u));
+      border-bottom: calc(1.5 * var(--u)) solid var(--line-dark);
+      z-index: 5;
+    }
+
+    .header-logo {
+      position: absolute;
+      left: calc(230 * var(--u));
+      top: calc(19 * var(--u));
+      width: calc(181 * var(--u));
+      height: auto;
+      display: block;
+    }
+
+    .header-brand {
+      position: absolute;
+      left: calc(432 * var(--u));
+      top: calc(46 * var(--u));
+      font-family: 'Special Elite', 'Courier Prime', serif;
+      font-size: calc(27 * var(--u));
+      font-weight: 400;
+      letter-spacing: calc(1.4 * var(--u));
+      color: #3D322A;
+      white-space: nowrap;
+    }
+
+    .header-nav {
+      position: absolute;
+      right: calc(180 * var(--u));
+      top: calc(50 * var(--u));
+      display: flex;
+      align-items: center;
+      gap: calc(46 * var(--u));
+    }
+
+    .header-nav a {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(20 * var(--u));
+      font-weight: 400;
+      letter-spacing: calc(0.8 * var(--u));
+      color: #3B3028;
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .header-nav a:hover {
+      opacity: 0.65;
+    }
+
+    /* First Airmail Banner Stripe (y: 150 -> 221) */
+    .banner-stripe-top {
+      position: absolute;
+      top: calc(150 * var(--u));
+      left: 0;
+      width: 100%;
+      height: calc(71 * var(--u));
+      object-fit: cover;
+      border-top: calc(1 * var(--u)) solid rgba(74, 67, 59, 0.35);
+      border-bottom: calc(1 * var(--u)) solid rgba(74, 67, 59, 0.35);
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       2. HERO SECTION (y: 221 -> 1048)
+       ========================================================================== */
+    .hero-section {
+      position: absolute;
+      top: calc(221 * var(--u));
+      left: 0;
+      width: 100%;
+      height: calc(827 * var(--u));
+      border-bottom: calc(1.5 * var(--u)) solid var(--line-dark);
+      z-index: 3;
+    }
+
+    /* Established Pill (y: 295, so 74u inside hero) */
+    .established-pill {
+      position: absolute;
+      top: calc(74 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(242 * var(--u));
+      height: calc(44 * var(--u));
+      border-radius: calc(22 * var(--u));
+      border: calc(1.2 * var(--u)) solid #3D322A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .established-pill::after {
+      content: "";
+      position: absolute;
+      inset: calc(3.5 * var(--u));
+      border-radius: calc(19 * var(--u));
+      border: calc(1 * var(--u)) dashed #6B6157;
+      pointer-events: none;
+    }
+
+    .established-pill span {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(13.5 * var(--u));
+      letter-spacing: calc(1.4 * var(--u));
+      color: #3D322A;
+      padding-top: calc(1 * var(--u));
+    }
+
+    /* Main Hero Title */
+    .hero-title {
+      position: absolute;
+      top: calc(144 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(1150 * var(--u));
+      text-align: center;
+      font-family: 'Special Elite', Georgia, serif;
+      font-size: calc(73 * var(--u));
+      font-weight: 400;
+      line-height: 1.23;
+      letter-spacing: calc(0.5 * var(--u));
+      color: #3B2D23;
+    }
+
+    /* Hero Subtitle */
+    .hero-subtitle {
+      position: absolute;
+      top: calc(443 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(1180 * var(--u));
+      text-align: center;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(26.5 * var(--u));
+      font-weight: 700;
+      line-height: 1.66;
+      letter-spacing: calc(0.2 * var(--u));
+      color: #463A31;
+    }
+
+    /* Explore Our Offerings Button (y: 824 -> 603u inside hero) */
+    .explore-btn {
+      position: absolute;
+      top: calc(603 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(320 * var(--u));
+      height: calc(63 * var(--u));
+      border: calc(1.5 * var(--u)) solid #3B2D23;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(19.5 * var(--u));
+      font-weight: 400;
+      letter-spacing: calc(1 * var(--u));
+      color: #2B211A;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .explore-btn:hover {
+      background-color: #3B2D23;
+      color: var(--bg-paper);
+    }
+
+    /* Floating Ephemera around Hero */
+    .stamp-1684 {
+      position: absolute;
+      left: calc(-47 * var(--u));
+      top: calc(552 * var(--u));
+      width: calc(376 * var(--u));
+      height: auto;
+      filter: drop-shadow(calc(2 * var(--u)) calc(3 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.18));
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .stamp-australia {
+      position: absolute;
+      left: calc(1663 * var(--u));
+      top: calc(322 * var(--u));
+      width: calc(297 * var(--u));
+      height: auto;
+      filter: drop-shadow(calc(1 * var(--u)) calc(2 * var(--u)) calc(3 * var(--u)) rgba(0, 0, 0, 0.12));
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .stamp-airmail {
+      position: absolute;
+      left: calc(185 * var(--u));
+      top: calc(881 * var(--u));
+      width: calc(324 * var(--u));
+      height: auto;
+      transform: rotate(12.3deg);
+      transform-origin: center center;
+      filter: drop-shadow(calc(2 * var(--u)) calc(3 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.16));
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .stamp-finger {
+      position: absolute;
+      left: calc(1144 * var(--u));
+      top: calc(875 * var(--u));
+      width: calc(362 * var(--u));
+      height: auto;
+      transform: rotate(19deg);
+      transform-origin: center center;
+      filter: drop-shadow(calc(2 * var(--u)) calc(3 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.16));
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       3. GOODS & SERVICES SECTION (y: 1048 -> 1834)
+       ========================================================================== */
+    .goods-heading {
+      position: absolute;
+      top: calc(1152 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cutive Mono', 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(46 * var(--u));
+      font-weight: 400;
+      letter-spacing: calc(2.2 * var(--u));
+      color: #3B3028;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .goods-underline {
+      position: absolute;
+      top: calc(1219 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(120 * var(--u));
+      height: calc(1.2 * var(--u));
+      background-color: #4A433B;
+      z-index: 3;
+    }
+
+    .service-boxes {
+      position: absolute;
+      top: calc(1305 * var(--u));
+      left: 0;
+      width: 100%;
+      height: calc(330 * var(--u));
+      z-index: 3;
+    }
+
+    .service-box {
+      position: absolute;
+      top: 0;
+      width: calc(444 * var(--u));
+      height: calc(330 * var(--u));
+      background-color: var(--box-brown);
+      border: calc(1.5 * var(--u)) solid var(--box-brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(24 * var(--u));
+    }
+
+    /* Dashed stitched inner border matching reference */
+    .service-box::after {
+      content: "";
+      position: absolute;
+      inset: calc(2.5 * var(--u));
+      border: calc(2 * var(--u)) dashed #EAE5DC;
+      pointer-events: none;
+    }
+
+    .service-box-1 { left: calc(235 * var(--u)); }
+    .service-box-2 { left: calc(728 * var(--u)); }
+    .service-box-3 { left: calc(1225 * var(--u)); }
+
+    .service-box p {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(26 * var(--u));
+      font-weight: 700;
+      line-height: 1.32;
+      letter-spacing: calc(0.3 * var(--u));
+      color: #F4F1EA;
+    }
+
+    /* Second Airmail Banner Stripe (y: 1834 -> 1905) */
+    .banner-stripe-mid {
+      position: absolute;
+      top: calc(1834 * var(--u));
+      left: 0;
+      width: 100%;
+      height: calc(71 * var(--u));
+      object-fit: cover;
+      border-top: calc(1 * var(--u)) solid rgba(74, 67, 59, 0.4);
+      border-bottom: calc(1.5 * var(--u)) solid var(--line-dark);
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       4. UPCOMING APPEARANCE SECTION (y: 1905 -> 2747)
+       ========================================================================== */
+    .stamp-this-end-up {
+      position: absolute;
+      left: calc(1473 * var(--u));
+      top: calc(1717 * var(--u));
+      width: calc(363 * var(--u));
+      height: auto;
+      filter: drop-shadow(calc(2 * var(--u)) calc(4 * var(--u)) calc(6 * var(--u)) rgba(0, 0, 0, 0.16));
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .stamp-4897 {
+      position: absolute;
+      left: calc(119 * var(--u));
+      top: calc(1884 * var(--u));
+      width: calc(466 * var(--u));
+      height: auto;
+      transform: rotate(-17.4deg);
+      transform-origin: center center;
+      filter: drop-shadow(calc(2 * var(--u)) calc(3 * var(--u)) calc(5 * var(--u)) rgba(0, 0, 0, 0.16));
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .stamp-plane-circle {
+      position: absolute;
+      left: calc(103 * var(--u));
+      top: calc(2070 * var(--u));
+      width: calc(206 * var(--u));
+      height: auto;
+      transform: rotate(43deg);
+      transform-origin: center center;
+      filter: drop-shadow(calc(2 * var(--u)) calc(3 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.16));
+      z-index: 7;
+      pointer-events: none;
+    }
+
+    /* Framed Event Card (x: 411 -> 1490, y: 2026 -> 2626) */
+    .event-card {
+      position: absolute;
+      left: calc(411 * var(--u));
+      top: calc(2026 * var(--u));
+      width: calc(1079 * var(--u));
+      height: calc(600 * var(--u));
+      background-color: #F4F1EB;
+      border: calc(2 * var(--u)) solid #483C33;
+      box-shadow: calc(7 * var(--u)) calc(8 * var(--u)) 0 rgba(0, 0, 0, 0.055);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 4;
+    }
+
+    /* Inner double-line frame */
+    .event-card::before {
+      content: "";
+      position: absolute;
+      inset: calc(2.5 * var(--u));
+      border: calc(1.2 * var(--u)) solid #483C33;
+      pointer-events: none;
+    }
+
+    /* L-shaped inner corner ticks */
+    .corner-tick {
+      position: absolute;
+      width: calc(14 * var(--u));
+      height: calc(14 * var(--u));
+      border-color: #5C5046;
+      border-style: solid;
+      border-width: 0;
+      pointer-events: none;
+    }
+    .corner-tick.tr {
+      top: calc(14 * var(--u));
+      right: calc(14 * var(--u));
+      border-top-width: calc(1.2 * var(--u));
+      border-right-width: calc(1.2 * var(--u));
+    }
+    .corner-tick.bl {
+      bottom: calc(14 * var(--u));
+      left: calc(14 * var(--u));
+      border-bottom-width: calc(1.2 * var(--u));
+      border-left-width: calc(1.2 * var(--u));
+    }
+    .corner-tick.br {
+      bottom: calc(14 * var(--u));
+      right: calc(14 * var(--u));
+      border-bottom-width: calc(1.2 * var(--u));
+      border-right-width: calc(1.2 * var(--u));
+    }
+
+    .event-eyebrow {
+      margin-top: calc(68 * var(--u));
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(13.5 * var(--u));
+      font-weight: 700;
+      letter-spacing: calc(4.8 * var(--u));
+      color: #483C33;
+      text-transform: uppercase;
+    }
+
+    .event-title {
+      margin-top: calc(24 * var(--u));
+      font-family: 'Special Elite', Georgia, serif;
+      font-size: calc(56 * var(--u));
+      font-weight: 400;
+      line-height: 1.15;
+      color: #3B2D23;
+    }
+
+    .event-meta {
+      margin-top: calc(36 * var(--u));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(42 * var(--u));
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(20.5 * var(--u));
+      font-weight: 700;
+      color: #3B2D23;
+    }
+
+    .event-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: calc(12 * var(--u));
+    }
+
+    .event-meta-item svg {
+      width: calc(21 * var(--u));
+      height: calc(21 * var(--u));
+      stroke: #3B2D23;
+      fill: none;
+      stroke-width: 1.8;
+      flex-shrink: 0;
+    }
+
+    .event-desc {
+      margin-top: calc(36 * var(--u));
+      width: calc(660 * var(--u));
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(20 * var(--u));
+      font-weight: 400;
+      line-height: 1.62;
+      color: #3E332A;
+    }
+
+    .event-bottom-rule {
+      position: absolute;
+      bottom: calc(63 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(215 * var(--u));
+      height: calc(1 * var(--u));
+      background-color: #5C5046;
+    }
+
+    /* Par Avion de Nuit Stamp on bottom right (straddling footer line) */
+    .stamp-par-avion {
+      position: absolute;
+      left: calc(1510 * var(--u));
+      top: calc(2700 * var(--u));
+      width: calc(487 * var(--u));
+      height: auto;
+      filter: drop-shadow(calc(1 * var(--u)) calc(2 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.14));
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       5. FOOTER SECTION (y: 2747 -> 3079)
+       ========================================================================== */
+    .site-footer {
+      position: absolute;
+      top: calc(2747 * var(--u));
+      left: 0;
+      width: 100%;
+      height: calc(332 * var(--u));
+      background-color: var(--bg-footer);
+      border-top: calc(1.5 * var(--u)) solid var(--line-dark);
+      z-index: 3;
+    }
+
+    .telegram-box {
+      position: absolute;
+      left: calc(699 * var(--u));
+      top: calc(54 * var(--u));
+      width: calc(487 * var(--u));
+      height: calc(163 * var(--u));
+      border: calc(1.2 * var(--u)) solid #7A7367;
+      display: flex;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .telegram-left {
+      width: calc(185 * var(--u));
+      height: 100%;
+      border-right: calc(1.2 * var(--u)) solid #7A7367;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: calc(4 * var(--u));
+    }
+
+    .telegram-title {
+      font-family: 'Cutive Mono', 'Courier Prime', monospace;
+      font-size: calc(31 * var(--u));
+      letter-spacing: calc(1 * var(--u));
+      color: #554E44;
+      line-height: 1;
+    }
+
+    .telegram-sub {
+      margin-top: calc(5 * var(--u));
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(15 * var(--u));
+      color: #665E53;
+    }
+
+    .telegram-right {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .telegram-right img {
+      width: calc(258 * var(--u));
+      height: auto;
+      opacity: 0.84;
+      display: block;
+    }
+
+    .footer-copy {
+      position: absolute;
+      top: calc(238 * var(--u));
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: calc(14 * var(--u));
+      line-height: 1.48;
+      color: #585147;
+      white-space: nowrap;
+    }
+
+    /* ==========================================================================
+       6. VINTAGE TELEGRAM CONTACT MODAL
+       ========================================================================== */
+    .contact-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(38, 29, 23, 0.58);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .contact-modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .contact-modal {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      background-color: #F4F1EB;
+      border: 2px solid #483C33;
+      box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.18);
+      padding: 36px 32px 32px;
+      text-align: center;
+      color: #3B2D23;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+    }
+
+    .contact-modal::before {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border: 1px solid #483C33;
+      pointer-events: none;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      font-family: 'Courier Prime', monospace;
+      font-size: 24px;
+      line-height: 1;
+      color: #483C33;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    .modal-close:hover {
+      opacity: 0.65;
+    }
+
+    .modal-stamp {
+      width: 120px;
+      height: auto;
+      margin: 0 auto 12px;
+      display: block;
+    }
+
+    .modal-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      color: #5A4E44;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-family: 'Special Elite', Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #3B2D23;
+      margin-bottom: 14px;
+    }
+
+    .modal-email-box {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px dashed #6B6157;
+      background: #EBE7DF;
+      font-size: 16px;
+      font-weight: 700;
+      color: #2B211A;
+      margin-bottom: 22px;
+      user-select: all;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #3B2D23;
+      background: transparent;
+      color: #2B211A;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .modal-btn.primary {
+      background-color: #4E3C32;
+      color: #F4F1EA;
+      border-color: #4E3C32;
+    }
+
+    .modal-btn:hover {
+      background-color: #3B2D23;
+      color: #F4F1EA;
+    }
+  </style>
+</head>
+<body>
+  <main class="page-canvas">
+    <!-- 1. TOP HEADER -->
+    <header class="site-header">
+      <img src="HPC_ logo_ RED.png" alt="Heirloom Packing Co. Postmark" class="header-logo">
+      <div class="header-brand">HEIRLOOM PACKING CO.</div>
+      <nav class="header-nav">
+        <a href="#about">ABOUT</a>
+        <a href="#offerings">OFFERINGS</a>
+        <a href="#events">EVENTS</a>
+        <a href="#contact" data-open-contact>CONTACT</a>
+      </nav>
+    </header>
+
+    <!-- FIRST AIRMAIL STRIPE -->
+    <img src="banner stripe.png" alt="" class="banner-stripe-top">
+
+    <!-- 2. HERO SECTION -->
+    <section class="hero-section" id="about">
+      <div class="established-pill">
+        <span>ESTABLISHED MMXXVI</span>
+      </div>
+
+      <h1 class="hero-title">
+        Beautifully Crafted<br>
+        Decorative Gift Boxes<br>
+        &amp; Packaging.
+      </h1>
+
+      <p class="hero-subtitle">
+        Bespoke gift boxes, handcrafted enclosures and<br>
+        heritage-quality wrapping materials designed to make every<br>
+        delivery feel like a discovered treasure.
+      </p>
+
+      <a href="#offerings" class="explore-btn">EXPLORE OUR OFFERINGS</a>
+    </section>
+
+    <!-- FLOATING HERO EPHEMERA -->
+    <img src="1684.png" alt="Vintage Oficial 1976 No. 1684 Label" class="stamp-1684">
+    <img src="australia stamp.png" alt="Australia Postage Stamp" class="stamp-australia">
+    <img src="air mail plane.png" alt="Air Mail 5 Cents Stamp" class="stamp-airmail">
+    <img src="pointing finger.png" alt="Vintage Pointing Hand" class="stamp-finger">
+
+    <!-- 3. GOODS & SERVICES SECTION -->
+    <section id="offerings">
+      <h2 class="goods-heading">Goods &amp; Services</h2>
+      <div class="goods-underline"></div>
+
+      <div class="service-boxes">
+        <div class="service-box service-box-1">
+          <p>Private Events &amp;<br>Craft Wrapping<br>Parties</p>
+        </div>
+        <div class="service-box service-box-2">
+          <p>Bespoke Wrapping<br>&amp; Custom Gift Boxes</p>
+        </div>
+        <div class="service-box service-box-3">
+          <p>Commercial Packaging<br>&amp; Wrapping on Site</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECOND AIRMAIL STRIPE -->
+    <img src="banner stripe.png" alt="" class="banner-stripe-mid">
+
+    <!-- 4. UPCOMING APPEARANCE SECTION -->
+    <img src="this end up.png" alt="This End Up Label" class="stamp-this-end-up">
+    <img src="4897.png" alt="Ticket No. 5382 - 4897" class="stamp-4897">
+    <img src="plane circle.png" alt="Airmail Plane Seal" class="stamp-plane-circle">
+
+    <section class="event-card" id="events">
+      <span class="corner-tick tr"></span>
+      <span class="corner-tick bl"></span>
+      <span class="corner-tick br"></span>
+
+      <div class="event-eyebrow">UPCOMING APPEARANCE</div>
+
+      <h2 class="event-title">
+        Cedar Park High School Art<br>
+        Fair
+      </h2>
+
+      <div class="event-meta">
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="17" rx="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+          </svg>
+          November 14th
+        </span>
+        <span class="event-meta-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s-7-5.75-7-11a7 7 0 1 1 14 0c0 5.25-7 11-7 11z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+          </svg>
+          Cedar Park, TX
+        </span>
+      </div>
+
+      <p class="event-desc">
+        Join us in person to purchase from our exclusive<br>
+        stock of of bespoke packages and &ldquo;old world&rdquo;<br>
+        style gift wrapping. We look forard to seeing<br>
+        you!
+      </p>
+
+      <div class="event-bottom-rule"></div>
+    </section>
+
+    <img src="par avion de nuit.png" alt="Par Avion de Nuit" class="stamp-par-avion">
+
+    <!-- 5. FOOTER -->
+    <footer class="site-footer" id="contact">
+      <a href="#contact" class="telegram-box" data-open-contact>
+        <div class="telegram-left">
+          <div class="telegram-title">TELEGRAM</div>
+          <div class="telegram-sub">(Contact Us)</div>
+        </div>
+        <div class="telegram-right">
+          <img src="HPC_ logo_ RED.png" alt="Heirloom Packing Co.">
+        </div>
+      </a>
+
+      <div class="footer-copy">
+        &copy; 2026 The Heirloom Packing Co.<br>
+        Crafted in Cedar Park, Texas.
+      </div>
+    </footer>
+  </main>
+
+  <!-- 6. VINTAGE TELEGRAM CONTACT MODAL -->
+  <div class="contact-modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <div class="contact-modal">
+      <button type="button" class="modal-close" id="closeContactModal" aria-label="Close">&times;</button>
+      <img src="HPC_ logo_ RED.png" alt="Heirloom Packing Co." class="modal-stamp">
+      <div class="modal-eyebrow">Dispatch a Telegram</div>
+      <h3 class="modal-title" id="contactModalTitle">Get in Touch</h3>
+      <div class="modal-email-box" id="ownerEmailText">rhonda.nielson@gmail.com</div>
+
+      <div class="modal-actions">
+        <a
+          href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=rhonda.nielson@gmail.com&amp;su=Inquiry%20for%20Heirloom%20Packing%20Co."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="modal-btn primary"
+        >
+          Open in Gmail (Webmail)
+        </a>
+        <a
+          href="mailto:rhonda.nielson@gmail.com?subject=Inquiry%20for%20Heirloom%20Packing%20Co."
+          class="modal-btn"
+        >
+          Open Default Email App
+        </a>
+        <button type="button" class="modal-btn" id="copyEmailBtn">
+          Copy Email Address
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var modal = document.getElementById('contactModal');
+      var closeBtn = document.getElementById('closeContactModal');
+      var copyBtn = document.getElementById('copyEmailBtn');
+      var email = 'rhonda.nielson@gmail.com';
+
+      function openModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.add('is-open');
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+      }
+
+      var triggers = document.querySelectorAll('[data-open-contact]');
+      for (var i = 0; i < triggers.length; i++) {
+        triggers[i].addEventListener('click', openModal);
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      copyBtn.addEventListener('click', function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email);
+        } else {
+          var temp = document.createElement('textarea');
+          temp.value = email;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+        }
+        copyBtn.textContent = 'Copied: ' + email;
+        setTimeout(function () {
+          copyBtn.textContent = 'Copy Email Address';
+        }, 2500);
+      });
+    })();
+  </script>
+</body>
+</html>
