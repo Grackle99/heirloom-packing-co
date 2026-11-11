@@ -741,6 +741,457 @@
       background-color: #3B2D23;
       color: #F4F1EA;
     }
+
+    /* ==========================================================================
+       7. MOBILE & TABLET RESPONSIVE LAYOUT (<= 900px)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .page-canvas {
+        width: 100%;
+        height: auto;
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+        overflow-x: hidden;
+      }
+
+      /* 1. Top Header */
+      .site-header {
+        position: relative;
+        top: auto;
+        left: auto;
+        height: auto;
+        padding: 18px 16px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1.5px solid var(--line-dark);
+      }
+
+      .header-logo {
+        position: static;
+        width: 112px;
+        height: auto;
+      }
+
+      .header-brand {
+        position: static;
+        font-size: 21px;
+        letter-spacing: 1.2px;
+        text-align: center;
+        white-space: normal;
+      }
+
+      .header-nav {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px 22px;
+        margin-top: 4px;
+      }
+
+      .header-nav a {
+        font-size: 14px;
+        letter-spacing: 0.8px;
+        padding: 4px 2px;
+      }
+
+      /* First Airmail Banner Stripe */
+      .banner-stripe-top {
+        position: relative;
+        top: auto;
+        left: auto;
+        display: block;
+        width: 100%;
+        height: 26px;
+        margin-top: 8px;
+        border-top: 1px solid rgba(74, 67, 59, 0.35);
+        border-bottom: 1px solid rgba(74, 67, 59, 0.35);
+      }
+
+      /* 2. Hero Section */
+      .hero-section {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        padding: 34px 20px 58px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-bottom: 1.5px solid var(--line-dark);
+      }
+
+      .established-pill {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: auto;
+        height: 34px;
+        padding: 0 18px;
+        border-radius: 17px;
+        border: 1.2px solid #3D322A;
+        margin-bottom: 24px;
+      }
+
+      .established-pill::after {
+        inset: 3px;
+        border-radius: 14px;
+        border: 1px dashed #6B6157;
+      }
+
+      .established-pill span {
+        font-size: 11px;
+        letter-spacing: 1.2px;
+        padding-top: 1px;
+      }
+
+      .hero-title {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 460px;
+        font-size: clamp(27px, 7.5vw, 38px);
+        line-height: 1.22;
+        letter-spacing: 0.4px;
+        margin-bottom: 18px;
+      }
+
+      .hero-subtitle {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 460px;
+        font-size: 15.5px;
+        line-height: 1.62;
+        letter-spacing: 0.15px;
+        margin-bottom: 28px;
+      }
+
+      .hero-subtitle br {
+        display: none;
+      }
+
+      .explore-btn {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 270px;
+        height: 48px;
+        border: 1.5px solid #3B2D23;
+        font-size: 14px;
+        letter-spacing: 1px;
+        z-index: 5;
+      }
+
+      /* Floating Hero Ephemera */
+      .stamp-1684 {
+        top: 195px;
+        left: -24px;
+        width: 84px;
+        filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.16));
+      }
+
+      .stamp-australia {
+        top: 192px;
+        left: auto;
+        right: -16px;
+        width: 74px;
+        filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.12));
+      }
+
+      .stamp-airmail {
+        position: relative;
+        top: auto;
+        left: auto;
+        float: left;
+        width: 104px;
+        margin-top: -38px;
+        margin-left: 12px;
+        filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.16));
+      }
+
+      .stamp-finger {
+        position: relative;
+        top: auto;
+        left: auto;
+        float: right;
+        width: 112px;
+        margin-top: -40px;
+        margin-right: 14px;
+        filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.16));
+      }
+
+      /* 3. Goods & Services Section */
+      #offerings {
+        position: relative;
+        clear: both;
+        padding: 28px 20px 44px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .goods-heading {
+        position: static;
+        transform: none;
+        font-size: clamp(26px, 7vw, 34px);
+        letter-spacing: 1.5px;
+        text-align: center;
+        white-space: normal;
+        margin-bottom: 10px;
+      }
+
+      .goods-underline {
+        position: static;
+        transform: none;
+        width: 76px;
+        height: 1.5px;
+        margin-bottom: 26px;
+      }
+
+      .service-boxes {
+        position: static;
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .service-box,
+      .service-box-1,
+      .service-box-2,
+      .service-box-3 {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        min-height: 132px;
+        padding: 26px 20px;
+        border: 1.5px solid var(--box-brown);
+      }
+
+      .service-box::after {
+        inset: 3px;
+        border: 1.5px dashed #EAE5DC;
+      }
+
+      .service-box p {
+        font-size: 18.5px;
+        line-height: 1.38;
+        letter-spacing: 0.3px;
+      }
+
+      /* Second Airmail Banner Stripe */
+      .banner-stripe-mid {
+        position: relative;
+        top: auto;
+        left: auto;
+        display: block;
+        width: 100%;
+        height: 26px;
+        border-top: 1px solid rgba(74, 67, 59, 0.4);
+        border-bottom: 1.5px solid var(--line-dark);
+      }
+
+      /* 4. Upcoming Appearance Section & Ephemera */
+      .stamp-this-end-up {
+        position: relative;
+        top: auto;
+        left: auto;
+        float: right;
+        width: 104px;
+        margin-top: -36px;
+        margin-right: 12px;
+        margin-bottom: 6px;
+        filter: drop-shadow(1px 3px 4px rgba(0, 0, 0, 0.16));
+      }
+
+      .stamp-4897 {
+        position: relative;
+        top: auto;
+        left: auto;
+        float: left;
+        width: 128px;
+        margin-top: -8px;
+        margin-left: 8px;
+        margin-bottom: -16px;
+        filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.16));
+      }
+
+      .stamp-plane-circle {
+        position: relative;
+        top: auto;
+        left: auto;
+        float: left;
+        width: 62px;
+        margin-top: 8px;
+        margin-left: -22px;
+        margin-bottom: -10px;
+        filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.16));
+      }
+
+      .event-card {
+        clear: both;
+        position: relative;
+        top: auto;
+        left: auto;
+        width: calc(100% - 32px);
+        max-width: 460px;
+        height: auto;
+        margin: 12px auto 34px;
+        padding: 36px 20px 40px;
+        border: 2px solid #483C33;
+        box-shadow: 5px 6px 0 rgba(0, 0, 0, 0.055);
+      }
+
+      .event-card::before {
+        inset: 3px;
+        border: 1px solid #483C33;
+      }
+
+      .corner-tick {
+        width: 10px;
+        height: 10px;
+      }
+      .corner-tick.tr {
+        top: 10px;
+        right: 10px;
+        border-top-width: 1.2px;
+        border-right-width: 1.2px;
+      }
+      .corner-tick.bl {
+        bottom: 10px;
+        left: 10px;
+        border-bottom-width: 1.2px;
+        border-left-width: 1.2px;
+      }
+      .corner-tick.br {
+        bottom: 10px;
+        right: 10px;
+        border-bottom-width: 1.2px;
+        border-right-width: 1.2px;
+      }
+
+      .event-eyebrow {
+        margin-top: 0;
+        font-size: 11px;
+        letter-spacing: 3px;
+      }
+
+      .event-title {
+        margin-top: 14px;
+        font-size: clamp(24px, 6.8vw, 32px);
+        line-height: 1.2;
+      }
+
+      .event-meta {
+        margin-top: 18px;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        font-size: 15px;
+      }
+
+      .event-meta-item {
+        gap: 8px;
+      }
+
+      .event-meta-item svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .event-desc {
+        margin-top: 18px;
+        width: 100%;
+        max-width: 380px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .event-desc br {
+        display: none;
+      }
+
+      .event-bottom-rule {
+        position: static;
+        transform: none;
+        width: 120px;
+        height: 1px;
+        margin-top: 24px;
+      }
+
+      .stamp-par-avion {
+        position: relative;
+        top: auto;
+        left: auto;
+        display: block;
+        width: 148px;
+        margin: -20px 12px -18px auto;
+        filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.14));
+      }
+
+      /* 5. Footer Section */
+      .site-footer {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        padding: 32px 20px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        border-top: 1.5px solid var(--line-dark);
+      }
+
+      .telegram-box {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        max-width: 340px;
+        height: 106px;
+        border: 1.2px solid #7A7367;
+      }
+
+      .telegram-left {
+        width: 44%;
+        border-right: 1.2px solid #7A7367;
+        padding-top: 2px;
+      }
+
+      .telegram-title {
+        font-size: 20px;
+        letter-spacing: 0.8px;
+      }
+
+      .telegram-sub {
+        margin-top: 4px;
+        font-size: 12px;
+      }
+
+      .telegram-right img {
+        width: 140px;
+        max-width: 82%;
+      }
+
+      .footer-copy {
+        position: static;
+        transform: none;
+        font-size: 12.5px;
+        line-height: 1.5;
+        white-space: normal;
+      }
+    }
   </style>
 </head>
 <body>
